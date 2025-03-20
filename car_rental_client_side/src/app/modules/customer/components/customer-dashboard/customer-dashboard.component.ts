@@ -29,7 +29,7 @@ export class CustomerDashboardComponent {
         return {
           ...element,
           processedImg: element.returnedImage 
-            ? `data:image/jpeg;base64,${element.returnedImage}` 
+            ? 'data:image/jpeg;base64,${element.returnedImage}'
             : 'assets/default-car.jpg' // Provide a fallback image
         };
       });

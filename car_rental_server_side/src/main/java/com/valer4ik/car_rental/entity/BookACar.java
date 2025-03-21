@@ -1,6 +1,7 @@
 package com.valer4ik.car_rental.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.valer4ik.car_rental.dto.BookACarDto;
 import com.valer4ik.car_rental.enums.BookCarStatus;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
@@ -25,6 +26,8 @@ public class BookACar {
 	
 	private BookCarStatus bookCarStatus;
 	
+	private BookACarDto bookACarDto;
+	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "user_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
@@ -36,6 +39,20 @@ public class BookACar {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore
 	private Car car;
+	
+	public BookACarDto getBookACarDto() {
+		BookACarDto bookACarDto = new BookACarDto();
+		bookACarDto.setId(id);
+		bookACarDto.setDays(days);
+		bookACarDto.setBookCarStatus(bookCarStatus);
+		bookACarDto.setPrice(price);
+		bookACarDto.setFromDate(fromDate);
+		bookACarDto.setToDate(toDate);
+		bookACarDto.setEmail(user.getEmail());
+		bookACarDto.setUsername(user.getUsername());
+		bookACarDto.setCarId(car.getId());
+		return bookACarDto;
+	}
 	
 	public Long getId() {
 		return id;
